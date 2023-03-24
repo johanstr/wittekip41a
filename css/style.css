@@ -1,0 +1,57 @@
+*, *::after, *::before {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
+    background-color: lightgray;
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+main form {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    min-width: 30%;
+    padding: 1rem 0.8rem;
+    border: 1px solid gray;
+    border-radius: 5px;
+    gap: 0.5rem;
+    background-color: white;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+form div label {
+    font-size: 0.8rem;
+}
+
+form div input {
+    padding: 0.5rem 0.3rem;
+    width: 100%;
+}
+
+form button {
+    padding: 0.5rem 0.3rem;
+    cursor: pointer;
+}
