@@ -10,6 +10,17 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <nav>
+        <section class="nav-branding">
+            <img src="img/logo4.png" alt="Webshop" />
+            <h1>Witte Kip</h1>
+        </section>
+        <section class="nav-items">
+            <a href="login.php">Inloggen</a><br />
+            <a href="register.php">Registeren</a>
+        </section>
+    </nav>
+    
     <main>
         <form method="POST" action="src/formhandlers/register.php">
             <div>
