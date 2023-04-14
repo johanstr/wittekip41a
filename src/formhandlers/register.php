@@ -1,39 +1,48 @@
 <?php
 
-// Globale variabelen nodig om een connectie te maken
-// met de databaseserver
-$dbHost = '127.0.0.1';
-$dbName = 'wittekip';
-$dbUser = 'root';
-$dbPassword = 'root';
-
-// Globale variabelen om te kunnen werken met de database
-// via PDO
-$dbConnection = null; // NUL, 0, ''
-$dbStatement = null;
-
-try {
-    $dbConnection = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbUser, $dbPassword);
-} catch(PDOException $error) {
-    header('location: ../../index.php');
-    exit();
+if($_SERVER['REQUEST_METHOD'] != 'POST') {
+    die('Geen toegang');
 }
 
-$username = $_POST['username'];
-$email = $_POST['email'];
-$password = password_hash($_POST['password'],PASSWORD_DEFAULT);
+// Database credentials
+$dbHost = '127.0.0.1'; 
+$dbName = 'wittekip41b';
+$dbUser = 'root';
+$dbPass = 'root';
 
-$sql = "INSERT INTO `users`(`username`, `email`, `password`)
-        VALUES(:username, :email, :password)";
+// Globale variabelen voor het werken met de database
+$db_connection = null;
+$db_statement = null;
 
+// Connectie maken met de database
+try {
+    $db_connection = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbUser, $dbPass);
+} catch(PDOException $error) {
+    header('location: ../../register.php');
+    exit(); // die()
+}
+
+// Connectie is geslaagd, dus nu kunnen we de gegevens vastleggen in de database
+$firstname = htmlentities( $_POST['firstname'] );
+$lastname = htmlentities( $_POST['lastname'] );
+$prefix = htmlentities( $_POST['prefix'] );
+$email = htmlentities( $_POST['email'] );
+$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
+$sql = "INSERT INTO `users`(`firstname`, `lastname`, `prefix`, `email`, `password`)
+        VALUES(:firstname, :lastname, :prefix, :email, :password)";
 $placeholders = [
-    ':username' => $username,
+    ':firstname' => $firstname,
+    ':lastname' => $lastname,
+    ':prefix' => $prefix,
     ':email' => $email,
     ':password' => $password
 ];
 
-$dbStatement = $dbConnection->prepare($sql);
-$dbStatement->execute($placeholders);
+$db_statement = $db_connection->prepare($sql);
+$db_statement->execute($placeholders);
 
+// Na het succesvol vastleggen in de database laten we de gebruiker
+// terugkeren naar het login scherm
 header('location: ../../login.php');
 exit();

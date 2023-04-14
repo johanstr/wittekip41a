@@ -10,6 +10,5 @@
  */
 function isActiveNavItem(string $name): bool
 {
-    // /src/db/index.php    $name = 'test'
     return str_contains($_SERVER['REQUEST_URI'], $name);
 }
